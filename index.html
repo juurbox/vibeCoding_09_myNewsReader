@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse News | 맞춤형 실시간 뉴스 리더</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 배경 데코레이션 그라디언트 블러 -->
+  <div class="bg-glow bg-glow-1" aria-hidden="true"></div>
+  <div class="bg-glow bg-glow-2" aria-hidden="true"></div>
+
+  <div class="app-container">
+    <!-- 프리미엄 글래스모피즘 헤더 -->
+    <header class="app-header">
+      <div class="header-top-bar">
+        <div class="brand-badge">
+          <span class="live-dot"></span>
+          <span class="brand-badge-text">LIVE PULSE</span>
+        </div>
+        <div class="header-meta">
+          <span id="currentDateDisplay" class="header-date">2026. 11. 23</span>
+          <button id="btnOpenSettings" class="btn-icon-glass" type="button" title="API 설정" aria-label="API 설정 열기">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="brand-hero">
+        <h1 class="hero-title">
+          맞춤형 <span class="gradient-text">뉴스 리더</span>
+        </h1>
+        <p class="hero-subtitle">
+          비즈니스, 스포츠, 문화 등 관심 있는 주제의 최신 헤드라인을 실시간으로 탐색하세요
+        </p>
+      </div>
+
+      <!-- 주제 다중 선택 컨트롤 바 -->
+      <section class="controls-card" aria-label="뉴스 필터 컨트롤">
+        <div class="controls-left">
+          <div class="filter-header-row">
+            <span class="controls-label">관심 주제 선택</span>
+            <button type="button" id="btnSelectAll" class="btn-text-action">모두 해제</button>
+          </div>
+          <div class="topics-group" id="topicsGroup" role="group" aria-label="주제 다중 선택">
+            <label class="topic-chip active" data-topic="business">
+              <input type="checkbox" name="topic" value="business" checked>
+              <span class="chip-dot"></span>
+              <span class="chip-icon">💼</span>
+              <span class="chip-text">비즈니스</span>
+            </label>
+
+            <label class="topic-chip active" data-topic="sports">
+              <input type="checkbox" name="topic" value="sports" checked>
+              <span class="chip-dot"></span>
+              <span class="chip-icon">⚽</span>
+              <span class="chip-text">스포츠</span>
+            </label>
+
+            <label class="topic-chip active" data-topic="culture">
+              <input type="checkbox" name="topic" value="culture" checked>
+              <span class="chip-dot"></span>
+              <span class="chip-icon">🎨</span>
+              <span class="chip-text">문화</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="controls-right">
+          <button id="btnFetchNews" class="btn-gradient-primary" type="button">
+            <span class="btn-glow"></span>
+            <svg class="btn-icon-svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span class="btn-label">뉴스 보기</span>
+          </button>
+        </div>
+      </section>
+    </header>
+
+    <!-- 메인 컨텐츠 영역 -->
+    <main class="main-content">
+      <!-- 상태 요약 정보 바 -->
+      <div class="feed-summary-bar" id="feedStatusBar">
+        <div class="summary-left">
+          <span class="summary-badge-icon">🎯</span>
+          <span class="summary-text">현재 피드:</span>
+          <div id="activeTopicsDisplay" class="active-topics-tags">
+            <!-- 주제 뱃지들이 동적으로 들어갑니다 -->
+          </div>
+        </div>
+        <div class="summary-right">
+          <span class="article-counter" id="articleCountDisplay">0개의 기사</span>
+        </div>
+      </div>
+
+      <!-- 뉴스 카드 그리드 -->
+      <section class="news-grid" id="newsGrid" aria-live="polite">
+        <!-- 자바스크립트로 세련된 카드가 마운트됩니다 -->
+      </section>
+
+      <!-- 빈 피드 안내 화면 -->
+      <div class="empty-state hidden" id="emptyState">
+        <div class="empty-illu">📰</div>
+        <h3>선택된 뉴스가 없습니다</h3>
+        <p>상단에서 하나 이상의 관심 주제를 선택한 후 <strong>'뉴스 보기'</strong>를 클릭하세요.</p>
+      </div>
+
+      <!-- 무한 스크롤 센티넬 및 모던 로딩 인디케이터 -->
+      <div class="sentinel-wrapper" id="sentinelContainer">
+        <div class="modern-loader hidden" id="loadingSpinner">
+          <div class="dots-pulse">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <p id="spinnerText" class="loader-text">최신 기사 10건을 더 불러오는 중...</p>
+        </div>
+        
+        <div class="end-of-feed hidden" id="endOfFeed">
+          <div class="end-icon">✨</div>
+          <p>모든 최신 기사를 확인했습니다</p>
+        </div>
+
+        <!-- 스크롤 감지 센티넬 엘리먼트 (높이 40px로 안정적 감지) -->
+        <div id="scrollSentinel" class="scroll-sentinel" aria-hidden="true"></div>
+      </div>
+    </main>
+
+    <!-- 기사 본문 읽기 프리미엄 모달 다이얼로그 -->
+    <div class="modal-overlay hidden" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        <button class="modal-close-pill" id="modalCloseBtn" aria-label="모달 닫기">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <div class="modal-body-scroll">
+          <div class="modal-hero-cover">
+            <img id="modalImage" src="" alt="기사 대표 이미지" class="modal-hero-img">
+            <div class="modal-cover-gradient"></div>
+            <div class="modal-cover-badges">
+              <span id="modalCategoryBadge" class="modal-cat-badge">카테고리</span>
+              <span id="modalRelativeTime" class="modal-time-badge">방금 전</span>
+            </div>
+          </div>
+
+          <div class="modal-article-wrap">
+            <div class="modal-publisher-row">
+              <div class="pub-avatar" id="modalPublisherAvatar">
+                <span id="modalPubInitial">N</span>
+              </div>
+              <div class="pub-meta">
+                <span id="modalSource" class="pub-name">언론사</span>
+                <time id="modalDate" class="pub-date">발행일시</time>
+              </div>
+            </div>
+
+            <h2 id="modalTitle" class="modal-headline">기사 제목</h2>
+
+            <div id="modalBody" class="modal-paragraphs">
+              <!-- 본문 텍스트 -->
+            </div>
+
+            <div class="modal-action-bar">
+              <a id="modalSourceLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-gradient-primary modal-outlink-btn">
+                <span>원문 기사 보러 가기</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- API 설정 모달 다이얼로그 -->
+    <div class="modal-overlay hidden" id="settingsModalOverlay" role="dialog" aria-modal="true">
+      <div class="modal-card modal-card-sm">
+        <button class="modal-close-pill" id="settingsModalCloseBtn" aria-label="설정 닫기">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="settings-box">
+          <div class="settings-head">
+            <div class="settings-head-icon">⚙️</div>
+            <div>
+              <h3>뉴스 API 연동 설정</h3>
+              <p>실시간 무료 공개 피드 엔진이 기본 적용되어 있습니다.</p>
+            </div>
+          </div>
+
+          <div class="form-item">
+            <label for="apiProviderSelect">제공자 모드</label>
+            <select id="apiProviderSelect" class="custom-select">
+              <option value="rss">무료 고속 피드 엔진 (ok.surf + Google News - 키 불필요)</option>
+              <option value="gnews">GNews API 직접 연동 (gnews.io)</option>
+            </select>
+          </div>
+
+          <div class="form-item" id="gnewsKeyGroup" style="display: none;">
+            <label for="gnewsApiKeyInput">GNews API Key</label>
+            <input type="text" id="gnewsApiKeyInput" class="custom-input" placeholder="GNews API 키를 붙여넣으세요">
+            <span class="form-note">gnews.io에서 무료 발급받은 키를 입력하면 1일 100회 직접 연동됩니다.</span>
+          </div>
+
+          <div class="settings-foot">
+            <button id="btnSaveSettings" class="btn-gradient-primary btn-full" type="button">설정 저장 및 새로고침</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 토스트 알림 컨테이너 -->
+    <div class="toast-stack" id="toastContainer" aria-live="assertive"></div>
+  </div>
+
+  <script src="js/config.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
